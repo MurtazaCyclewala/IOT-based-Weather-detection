@@ -1,0 +1,51 @@
+
+readChannelID = 1598373;
+readAPIKey = 'ZXSA214Z1PNDM360';
+
+[time,temp,gas,atm] = thingSpeakRead(readChannelID, 'ReadKey', readAPIKey,'Fields',[1,2,3,4,5],'NumPoints',5,'OutputFormat','TimeTable');
+time
+
+    if time.(1)(5) > 35 
+        ans = "Hot Weather";
+    elseif time.(1)(5) >= 25
+        ans = "Mild Weather";
+    elseif time.(1)(5) >=10
+        ans = "Good Weather";
+    else
+        ans = "Chill Weather";
+    end
+ 
+    if time.(2)(5) > 35 
+        ans = ans + " with POOR Air Quality";
+    elseif time.(2)(5) >= 25
+        ans = ans + " with BAD Air Quality";
+    elseif time.(2)(5) >=10
+        ans = ans + " with Decent Air Quality";
+    else
+        ans = ans + " with Great Air Quality";
+    end
+    
+    if time.(3)(5) > 0.4 
+        ans = ans + " and Calm/Still weather";
+    else
+        ans = ans + " and Chances to shift";
+    end
+    
+    if time.(4)(5) > 30 & time.(2)(5) > 25
+        ans2 = ". The sun will stay hidden under the smog";
+    elseif time.(4)(5) > 30 
+        ans2 = ". The sun will shine under clear sky";
+    elseif time.(4)(5) < 30
+        ans2 = ". The sun wont shine well today";
+    end
+    
+    if time.(5)(5) > 70
+        ans2 = ans2 + " with high chances of rain to cool off";
+    elseif time.(5)(5) > 30
+        ans2 = ans2 + " with mild chances of rain";
+    else 
+        ans2 = ans2 + " with low-to-none chances of rain";
+    end
+        
+    
+ans+ans2
