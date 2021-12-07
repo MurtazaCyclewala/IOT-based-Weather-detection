@@ -1,0 +1,5 @@
+readChannelID = [1598373];
+fieldID1 = [1,2,3,4,5];
+readAPIKey = 'ZXSA214Z1PNDM360';
+[data, time] = thingSpeakRead(readChannelID, 'Field', fieldID1, 'NumPoints', 5, 'ReadKey', readAPIKey);
+plot(time, data);
